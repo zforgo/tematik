@@ -11,10 +11,7 @@ import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.PhraseQuery;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.*;
 import org.apache.lucene.search.spans.SpanNearQuery;
 import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.search.spans.SpanTermQuery;
@@ -56,10 +53,14 @@ public class StringQueryTest {
         var reader = DirectoryReader.open(directory);
         var searcher = new IndexSearcher(reader);
 
-        final var analyzer = new StandardAnalyzer();
-        var qp0 = new QueryParser("content", analyzer);
+//        var q = new TermQuery(new Term("content", "bergend*"));
+//        var q = new PrefixQuery(new Term("content", "bergend"));
+//        q.setRewriteMethod(MultiTermQuery.SCORING_BOOLEAN_REWRITE);
 
-        var result = searcher.search(qp0.parse("BErgendy"), 20);
+        var q = new WildcardQuery(new Term("content", "*ergend*"));
+        q.setRewriteMethod(MultiTermQuery.SCORING_BOOLEAN_REWRITE);
+
+        var result = searcher.search(q, 20);
         dumpResult(result);
         reader.close();
     }

@@ -1,5 +1,6 @@
 package io.github.zforgo.tematik;
 
+import io.github.zforgo.tematik.lucene.model.IMDBItem;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -12,6 +13,10 @@ import org.apache.lucene.store.Directory;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.EnumSet;
+
+import static io.github.zforgo.tematik.lucene.model.IMDBItem.Format.DVD;
+import static io.github.zforgo.tematik.lucene.model.IMDBItem.Type.MOVIE;
 
 public class BasicStoreTest {
     private static final Directory directory = new ByteBuffersDirectory();
@@ -22,6 +27,7 @@ public class BasicStoreTest {
 
     @Test
     void indexDemo() throws IOException {
+//        new IMDBItem(null, null, MOVIE , EnumSet.of(DVD),1999,0);
         var writer = new IndexWriter(directory, new IndexWriterConfig(new StandardAnalyzer()));
         {
             var doc = new Document();
