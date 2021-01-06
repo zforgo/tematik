@@ -1,13 +1,14 @@
 package io.github.zforgo.tematik.lucene;
 
 import io.github.zforgo.tematik.lucene.model.StringModel;
-import io.github.zforgo.tematik.lucene.support.Utils;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
+
+import static io.github.zforgo.tematik.lucene.support.Utils.dumpResult;
 
 public class SimpleStringQueryTest extends TestBase<StringModel> {
     @Override
@@ -28,7 +29,7 @@ public class SimpleStringQueryTest extends TestBase<StringModel> {
         var q = new TermQuery(new Term("content", "bergendy"));
         var result = searcher.search(q, 20);
         // id:1 score is higher
-        Utils.dumpResult(result);
+        dumpResult(result);
     }
 
     @Test
@@ -39,9 +40,8 @@ public class SimpleStringQueryTest extends TestBase<StringModel> {
         // uncomment to use real scoring instead of constants
 //        q.setRewriteMethod(MultiTermQuery.SCORING_BOOLEAN_REWRITE);
         var result = searcher.search(q, 20);
-        Utils.dumpResult(result);
+        dumpResult(result);
     }
-
 
     @Test
     void wildcardQuery() throws IOException {
@@ -50,6 +50,6 @@ public class SimpleStringQueryTest extends TestBase<StringModel> {
         var q = new WildcardQuery(new Term("content", "*bergend*"));
         q.setRewriteMethod(MultiTermQuery.SCORING_BOOLEAN_REWRITE);
         var result = searcher.search(q, 20);
-        Utils.dumpResult(result);
+        dumpResult(result);
     }
 }

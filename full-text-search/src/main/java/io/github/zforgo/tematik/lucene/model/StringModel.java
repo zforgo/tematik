@@ -1,6 +1,6 @@
 package io.github.zforgo.tematik.lucene.model;
 
-import io.github.zforgo.tematik.TermVectorTextField;
+import io.github.zforgo.tematik.lucene.TermVectorTextField;
 import io.github.zforgo.tematik.lucene.support.IndexAware;
 import lombok.Value;
 import org.apache.lucene.document.Field;
@@ -17,7 +17,7 @@ public class StringModel implements IndexAware {
     @Override
     public List<IndexableField> getDocumentFields() {
         return List.of(
-                new TermVectorTextField("content", content, Field.Store.NO),
+                new TermVectorTextField("content", content, Field.Store.YES),
                 new SortedDocValuesField("content", new BytesRef(content))
         );
     }
