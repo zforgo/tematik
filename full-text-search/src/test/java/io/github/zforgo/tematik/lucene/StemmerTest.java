@@ -32,8 +32,8 @@ public class StemmerTest extends TestBase<IMDBItem> {
         return List.of(
                 ofMovie("Kutyák és macskák 2.",     "A rusnya macska bosszúja", 2010),
                 ofMovie("Kutyák és macskák 3.",     "A mancs parancs",          2020),
-                ofMovie("Terminátor 2.",             "Az ítélet napja",         1991),
-                ofMovie("Melegedő helyzet",          "Nincs neki",              2012)
+                ofMovie("Terminátor 2.",            "Az ítélet napja",          1991),
+                ofMovie("Melegedő helyzet",         null,                         2012)
         );
         // @formatter:on
     }

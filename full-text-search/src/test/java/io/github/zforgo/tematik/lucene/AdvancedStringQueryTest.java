@@ -57,14 +57,15 @@ public class AdvancedStringQueryTest extends TestBase<StringModel> {
 
 /*
         var q = new SpanNearQuery(new SpanQuery[]{
-                new SpanTermQuery(new Term("content", "lucene")),
-                new SpanTermQuery(new Term("content", "doug"))},
-                7,
+                    new SpanTermQuery(new Term("content", "lucene")),
+                    new SpanTermQuery(new Term("content", "doug"))},
+                6,
                 true);
 */
         var result = searcher.search(q, 20);
         dumpResult(result);
     }
+
     @Test
     void phraseQuery() throws IOException {
         var input = "lucene doug the";

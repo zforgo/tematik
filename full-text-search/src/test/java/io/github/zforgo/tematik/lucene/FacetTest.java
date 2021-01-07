@@ -6,10 +6,8 @@ import org.apache.lucene.facet.FacetsCollector;
 import org.apache.lucene.facet.range.LongRange;
 import org.apache.lucene.facet.range.LongRangeFacetCounts;
 import org.apache.lucene.facet.taxonomy.FastTaxonomyFacetCounts;
-import org.apache.lucene.index.Term;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.MatchAllDocsQuery;
-import org.apache.lucene.search.TermQuery;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -18,7 +16,6 @@ import java.util.List;
 import static io.github.zforgo.tematik.lucene.model.FacetedProduct.of;
 import static io.github.zforgo.tematik.lucene.model.Product.Color.*;
 import static io.github.zforgo.tematik.lucene.support.Utils.dumpResult;
-import static io.github.zforgo.tematik.lucene.support.Utils.stripToken;
 
 public class FacetTest extends FacetedTestBase<FacetedProduct> {
     @Override
@@ -74,8 +71,8 @@ public class FacetTest extends FacetedTestBase<FacetedProduct> {
         final var nema = new LongRange("Hülyének nézel?", 130_000, false, Long.MAX_VALUE, true);
 
         var searcher = new IndexSearcher(reader);
-//        var q = new MatchAllDocsQuery();
-        var q = new TermQuery(new Term("szin", stripToken(RED.name(), analyzer)));
+        var q = new MatchAllDocsQuery();
+//        var q = new TermQuery(new Term("szin", stripToken(RED.name(), analyzer)));
 
         FacetsCollector fc = new FacetsCollector();
         var result = FacetsCollector.search(searcher, q, 10, fc);

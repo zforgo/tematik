@@ -54,7 +54,6 @@ public class Product implements IndexAware {
     public List<IndexableField> getDocumentFields() {
         return List.of(
                 new TermVectorTextField("gyarto", gyarto, YES),
-                new FacetField("gyarto", gyarto),
 
                 new TermVectorTextField("model", model, YES),
 

@@ -18,7 +18,7 @@ public class SimpleStringQueryTest extends TestBase<StringModel> {
                         "Mint ismert, Bergendy István Liszt Ferenc díjas zenész."),
 
                 new StringModel(
-                        "Bergendy István, az együttes  zenekarvezetője szaxofonozik. Bergendy zenekar a " +
+                        "Bergendy István, az együttes  zenekarvezetője szaxofonozik. A Bergendy zenekar a " +
                                 "Süsü, a sárkány című bábfilm főcímdalát énekli Bodrogi Gyulával az MTVA 1-es stúdiójában")
         );
     }
@@ -46,7 +46,6 @@ public class SimpleStringQueryTest extends TestBase<StringModel> {
     @Test
     void wildcardQuery() throws IOException {
         var searcher = new IndexSearcher(reader);
-        // first run: all scores are 1.0
         var q = new WildcardQuery(new Term("content", "*ergend*"));
         q.setRewriteMethod(MultiTermQuery.SCORING_BOOLEAN_REWRITE);
         var result = searcher.search(q, 20);

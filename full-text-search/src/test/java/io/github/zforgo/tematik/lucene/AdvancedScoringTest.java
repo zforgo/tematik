@@ -49,63 +49,10 @@ public class AdvancedScoringTest extends TestBase<Product> {
     void firstTest() throws IOException {
         var searcher = new IndexSearcher(reader);
         var q = new BooleanQuery.Builder()
-                .add(newRangeQuery("ar", 0, 60_000), MUST)
+                .add(newRangeQuery("ar", 0, 50_000), MUST)
                 .build();
 
-        var result = searcher.search(q, 3);
+        var result = searcher.search(q, 20);
         dumpResult(result, reader, "model", "szin", "ar", "felbontas", "vizallosag");
-    }
-
-    /*
-1. lépés max 60
-var q = new BooleanQuery.Builder()
-        .add(newRangeQuery("ar", 0, 60_000), MUST)
-
--------
-2. lépés legyen piros
-var q = new BooleanQuery.Builder()
-        .add(newRangeQuery("ar", 0, 60_000), MUST)
-        .add(new TermQuery(new Term("szin", stripToken(RED.name(), analyzer))), SHOULD)
--------
-3. lépés max 60, de jó lenne 50, na meg legyen piros
-var q = new BooleanQuery.Builder()
-        .add(newRangeQuery("ar", 0, 60_000), MUST)
-        .add(newRangeQuery("ar", 0, 50_000), SHOULD)
-        .add(new TermQuery(new Term("szin", stripToken(RED.name(), analyzer))), SHOULD)
-
-4. lépés na pixel. legyen min 14 megás.
-var q = new BooleanQuery.Builder()
-        .add(newRangeQuery("ar", 0, 60_000), FILTER)
-        .add(newRangeQuery("ar", 0, 50_000), SHOULD)
-        .add(new TermQuery(new Term("szin", stripToken(RED.name(), analyzer))), SHOULD)
-        .add(newRangeQuery("felbontas", 14, Integer.MAX_VALUE), SHOULD)
-látható, hogy a 13-as előbb van, mert olcsóbb is és piros is
-5. lépés nekem a mega fontosabb
-var q = new BooleanQuery.Builder()
-        .add(newRangeQuery("ar", 0, 60_000), FILTER)
-        .add(newRangeQuery("ar", 0, 50_000), SHOULD)
-        .add(new TermQuery(new Term("szin", stripToken(RED.name(), analyzer))), SHOULD)
-        .add(new BoostQuery(newRangeQuery("felbontas", 14, Integer.MAX_VALUE), 2f), SHOULD)
-
-6. lépés legyen vízálló
-var q = new BooleanQuery.Builder()
-        .add(newRangeQuery("ar", 0, 60_000), FILTER)
-        .add(newRangeQuery("ar", 0, 50_000), SHOULD)
-        .add(new TermQuery(new Term("szin", stripToken(RED.name(), analyzer))), SHOULD)
-        .add(new BoostQuery(newRangeQuery("felbontas", 14, Integer.MAX_VALUE), 2f), SHOULD)
-        .add(newRangeQuery("vizallosag", 5, Integer.MAX_VALUE), SHOULD)
-7. minél nagyobb annál jobb
-var boost = DoubleValuesSource.fromIntField("felbontas");
-
-var q = new BooleanQuery.Builder()
-        .add(newRangeQuery("ar", 0, 60_000), FILTER)
-        .add(newRangeQuery("ar", 0, 50_000), SHOULD)
-        .add(new TermQuery(new Term("szin", stripToken(RED.name(), analyzer))), SHOULD)
-        .add(boostByValue(newRangeQuery("felbontas", 8, Integer.MAX_VALUE), boost), SHOULD)
-        .add(newRangeQuery("vizallosag", 5, Integer.MAX_VALUE), SHOULD)
-     */
-
-    @Test
-    void simpleFacetTest() {
     }
 }

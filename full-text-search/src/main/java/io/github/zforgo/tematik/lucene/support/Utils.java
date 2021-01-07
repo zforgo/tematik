@@ -39,7 +39,7 @@ public class Utils {
 
         final var strPatternPart = "%-" + (100 / fields.length) + "s";
         final var strPattern = String.join("", Collections.nCopies(fields.length, strPatternPart));
-        final var pattern = ANSI_GREEN + "%5d." + ANSI_RESET + "  - %-12.6f " + strPattern + "%n";
+        final var pattern = ANSI_GREEN + "%5d." + ANSI_RESET + "  | %-12.6f " + strPattern + "%n";
         System.out.printf(ANSI_YELLOW + "\t\t\t\t\t   " + strPattern + "%n", (Object[]) fields);
         System.out.println("------------------------------------------------------------------------------------------------------------------------------" + ANSI_RESET);
 

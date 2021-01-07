@@ -22,7 +22,6 @@ import static io.github.zforgo.tematik.lucene.model.IMDBItem.ofMovie;
 import static io.github.zforgo.tematik.lucene.support.Utils.dumpResult;
 import static io.github.zforgo.tematik.lucene.support.Utils.stripToken;
 
-// TODO synonym
 public class StringCorrectionTest extends TestBase<IMDBItem> {
     @Override
     public List<IMDBItem> items() {
@@ -43,6 +42,10 @@ public class StringCorrectionTest extends TestBase<IMDBItem> {
 
         // see: unaccented term gives result
         // var q = new FuzzyQuery(new Term("cim", "kutyak"));
+
+        // see: different words appeared in result
+        // var q = new FuzzyQuery(new Term("alcim", "macs"));
+
         var result = searcher.search(q, 20);
         dumpResult(result);
     }
@@ -74,7 +77,7 @@ public class StringCorrectionTest extends TestBase<IMDBItem> {
 
         var searcher = new IndexSearcher(reader);
         var q = new FuzzyQuery(new Term("content", str));
-//        var q = new FuzzyQuery(new Term("content", str), 2, 0, 3, true);
+//        var q = new FuzzyQuery(new Term("content", str), 1, 0, 100, true);
         var result = searcher.search(q, 20);
         dumpResult(result, reader, "content");
     }
