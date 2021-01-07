@@ -47,7 +47,7 @@ public class SimpleStringQueryTest extends TestBase<StringModel> {
     void wildcardQuery() throws IOException {
         var searcher = new IndexSearcher(reader);
         // first run: all scores are 1.0
-        var q = new WildcardQuery(new Term("content", "*bergend*"));
+        var q = new WildcardQuery(new Term("content", "*ergend*"));
         q.setRewriteMethod(MultiTermQuery.SCORING_BOOLEAN_REWRITE);
         var result = searcher.search(q, 20);
         dumpResult(result);

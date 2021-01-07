@@ -60,13 +60,13 @@ public class StringCorrectionTest extends TestBase<IMDBItem> {
         reader = DirectoryReader.open(writer);
 
 //      Kővágótőttős vs Kővágótöttös
-//        var input = "Kővágótőttős";
+        var input = "Kővágótőttős";
 
 //      Óhid vs Óhíd
 //        var input = "Óhíd";
 
 //      Bak
-        var input = "Bak";
+//        var input = "Bak";
 
 
         final var str = stripToken(input, analyzer);
